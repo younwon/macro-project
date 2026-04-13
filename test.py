@@ -1,10 +1,16 @@
 from playwright.sync_api import sync_playwright
 
 with sync_playwright() as p:
-    browser = p.chromium.launch(headless=False)  # 창 보이게
+    # 브라우저를 화면에 띄워서 실행
+    browser = p.chromium.launch(headless=False)
     page = browser.new_page()
     
-    page.goto("https://www.google.com")
+    # NOL티켓 주소로 이동
+    page.goto("https://www.naver.com/")
     
-    input("엔터 누르면 종료")
+    # 페이지 제목 출력
+    print(f"접속 성공! 페이지 제목: {page.title()}")
+    
+    # 5초 뒤에 종료
+    page.wait_for_timeout(5000)
     browser.close()
