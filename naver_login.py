@@ -52,7 +52,7 @@ with sync_playwright() as p:
     if did_login:
         context.storage_state(path="state.json") #현재 로그인 상태를 파일로 저장
         #저장되는 것(쿠키, 로그인 세션, localStorage 등)
-        #그래서 state.json파일 생성됨
+        #그래서 state.json파일 생성됨(git에 공유금지)
         print("로그인 상태 저장 완료")
 
     page.wait_for_timeout(5000)
