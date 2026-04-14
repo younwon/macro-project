@@ -1,13 +1,20 @@
 from playwright.sync_api import sync_playwright
 import pyperclip
+import os
 
 USER_ID = "test123"
 USER_PW = "test321"
 
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=False)
-    #context = browser.new_context() 쿠기 저장, 로그인 상태 등을 저장하는 계정? 같은 것(처음할때)
-    context = browser.new_context(storage_state="state.json")
+
+    if os.path.exists("state.json"):
+        print("저장된 로그인 상태 사용")
+        context = browser.new_context(storage_state="state.json")
+    else:
+        print("state.json 없음 새로 로그인 필요")
+        context = browser.new_context() #쿠기 저장, 로그인 상태 등을 저장하는 계정? 같은 것(처음할때)
+
     page = context.new_page()
 
     did_login = False #로그인 상태 검사
